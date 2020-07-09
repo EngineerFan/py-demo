@@ -12,4 +12,3 @@ for i in range(len(initial_array)):
     for j in range(i + 1, len(initial_array)):
         if tmp == initial_array[j]:
             print(initial_array[i], initial_array[j])
-
