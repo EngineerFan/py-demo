@@ -5,6 +5,10 @@
 # @Description : demo
 
 
-l1 = [(1, 2), (3, 4)]
-if (1, 3) in l1:
-    print(True)
+s1 = set([-1, 0, 1])
+s2 = set([-1, 1, 0])
+print('s1:', s1)
+print('s2:', s2)
+print(s1 == s2)
+
+print( -1)
