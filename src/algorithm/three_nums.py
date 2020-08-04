@@ -17,43 +17,42 @@ description: 给你一个包含 n 个整数的数组 nums，判断 nums 中�
 ]
 
 """
-from typing import List
 import time
+from typing import List
 
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        start = time.time()
+        nums.sort(reverse=False)
+        print(nums)
         result = []
-        count_dic = {}
+
         nums_length = len(nums)
-        for i in range(nums_length):
-            if count_dic[str(nums[i])] is None:
-                count_dic[str(nums[i])] = 1
-            else:
+        print('num_length: ', nums_length)
+        for i in range(nums_length - 2):
+            if i != 0 and nums[i - 1] == nums[i]:
                 continue
-            for j in range(i + 1, nums_length):
-                a, b = nums[i], nums[j]
-                c = -(a + b)
-                if c in nums:
-                    c_index = nums.index(c)
-                    if c_index == i or c_index == j:
-                        continue
-                    s_l = set([a, b, c])
-                    flag = False
-                    for li in result:
-                        if set(li) == s_l:
-                            flag = True
-                            break
-                    if not flag:
-                        result.append([a, b, c])
-        end = time.time()
-        print('s: ', (end - start))
+            a = i
+            b = i + 1
+            c = nums_length - 1
+            sum_a = 0 - nums[a]
+            while b < c:
+                if c < nums_length - 1 and nums[c] == nums[c + 1]:
+                    c = c - 1
+                    continue
+                if nums[b] + nums[c] > sum_a:
+                    c = c - 1
+                elif nums[b] + nums[c] < sum_a:
+                    b = b + 1
+                else:
+                    result.append([nums[a], nums[b], nums[c]])
+                    b = b + 1
+                    c = c - 1
         return result
 
 
 if __name__ == '__main__':
     so = Solution()
-    array = [-1, 0, 1, 2, -1, -4]
+    array = [1, -1, -1, 0]
 
     print(so.threeSum(array))

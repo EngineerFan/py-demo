@@ -11,4 +11,14 @@ print('s1:', s1)
 print('s2:', s2)
 print(s1 == s2)
 
-print( -1)
+print(-1)
+d = dict()
+d['_1'] = 2
+print(d)
+print(str(1) == str)
+print('_' + str(1))
+print('-' * 100)
+l = [0, 0, 0]
+print(l.index(0))
+print(l.index(0))
+print(l.index(1,1,2))
