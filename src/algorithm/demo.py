@@ -5,3 +5,4 @@
 # @Description : demo
 
 
+print(divmod(10, 5))

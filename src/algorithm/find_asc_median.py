@@ -87,13 +87,10 @@ class Solution:
                         return nums2[tmp - 1]
 
             else:
-                # 根据长度可以划分三种情况
-                if l1_max > l2_max:
-                    pass
-                elif l1_max < l2_max:
-                    pass
-                else:
-                    pass
+                # 说明两个数组元素中交叉
+
+                pass
+
 
         return median
 
