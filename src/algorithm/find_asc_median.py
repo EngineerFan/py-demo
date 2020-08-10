@@ -31,86 +31,35 @@ from typing import List
 
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        median = 0.0
-        l1, l2 = len(num1), len(num2)
-        if l1 != 0 and l2 == 0:
-            print(type(l1 / 2))
-            if l1 % 2 == 0:
-                return (num1[int(l1 / 2)] + nums1[int(l1 / 2) - 1]) / 2
-            else:
-                return nums1[round(l1 / 2)]
-
-        elif l1 == 0 and l2 != 0:
-            if l2 % 2 == 0:
-                return (num2[int(l2 / 2)] + nums2[int(l2 / 2) - 1]) / 2
-            else:
-                return num2[int(l2 / 2)]
-        else:
-            l1_max, l2_max = nums1[l1 - 1], nums2[l2 - 1]
-            l1_min, l2_min = nums1[0], nums2[0]
-            # 两种特殊情况优先解决
-            if l1_min >= l2_max:
-                tmp = int((l1 + l2) / 2)
-                remainder = (l1 + l2) % 2
-                if remainder == 0:
-                    if tmp == l2:
-                        return (nums2[tmp - 1] + nums1[0]) / 2
-                    elif tmp < l2:
-                        return (nums2[tmp - 1] + nums2[tmp - 2]) / 2
-                    else:
-                        tmp = tmp - l2 - 1
-                        return (nums1[tmp] + nums1[tmp + 1]) / 2
+        def getKthElement(k):
+            index1, index2 = 0, 0
+            while True:
+                if index1 == m:
+                    return nums2[index2 + k - 1]
+                if index2 == n:
+                    return nums1[index1 + k - 1]
+                if k == 1:
+                    return min(nums1[index1], nums2[index2])
+                newIndex1 = min(index1 + k // 2 - 1, m - 1)
+                newIndex2 = min(index2 + k // 2 - 1, n - 1)
+                pivot1, pivot2 = nums1[newIndex1], nums2[newIndex2]
+                if pivot1 <= pivot2:
+                    k -= newIndex1 - index1 + 1
+                    index1 = newIndex1 + 1
                 else:
-                    tmp_int = round((l1 + l2) / 2)
-                    if tmp_int <= l2:
-                        return nums2[tmp_int - 1]
-                    else:
-                        tmp = tmp_int - l2
-                        return nums1[tmp - 1]
-            elif l2_min >= l1_max:
-                tmp = int((l1 + l2) / 2)
-                remainder = (l1 + l2) % 2
-                if remainder == 0:
-                    if tmp == l1:
-                        return (nums1[tmp - 1] + nums2[0]) / 2
-                    elif tmp < l1:
-                        return (nums1[tmp - 1] + nums1[tmp - 2]) / 2
-                    else:
-                        tmp = tmp - l1 - 1
-                        return (nums2[tmp] + nums2[tmp + 1]) / 2
-                else:
-                    tmp_int = round((l1 + l2) / 2)
-                    if tmp_int <= l1:
-                        return nums1[tmp_int - 1]
-                    else:
-                        tmp = tmp_int - l1
-                        return nums2[tmp - 1]
+                    k -= newIndex2 - index2 + 1
+                    index2 = newIndex2 + 1
 
-            else:
-                # 说明两个数组元素中交叉
-
-                pass
-
-
-        return median
-
-
-def deep_traverse(self, nums1: List[int], nums2: List[int], mid1: int, mid2: int):
-    if nums1[mid1] > nums2[mid2]:
-        if mid1 == 0:
-            pass
+        m, n = len(nums1), len(nums2)
+        totalLen = m + n
+        if totalLen % 2 == 1:
+            return getKthElement((totalLen + 1) // 2)
         else:
-            mid1 = int(mid1 / 2)
-        self.deep_traverse(nums1, nums2, mid1, mid2)
-    elif nums1[mid1] < nums2[mid2]:
-        pass
-    else:
-        pass
-    pass
+            return ((getKthElement(totalLen // 2)) + getKthElement(totalLen // 2 + 1)) / 2
 
 
 if __name__ == '__main__':
     so = Solution()
     num1 = [1, 3, 5]
-    num2 = []
+    num2 = [1,2]
     print(so.findMedianSortedArrays(num1, num2))
