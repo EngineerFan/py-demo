@@ -29,6 +29,7 @@ nums2 = [3, 4]
 from typing import List
 
 
+
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         def getKthElement(k):
@@ -61,5 +62,5 @@ class Solution:
 if __name__ == '__main__':
     so = Solution()
     num1 = [1, 3, 5]
-    num2 = [1,2]
+    num2 = [1, 2]
     print(so.findMedianSortedArrays(num1, num2))
