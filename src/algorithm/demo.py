@@ -4,12 +4,6 @@
 # @Software    : PyCharm
 # @Description : demo
 
-
-print(divmod(10, 5))
-
-s = 'fdagsehgyrhrw'
-print(str(s)[5])
-
-result = str(s)[5]
-print(result.join(str(s)[6]))
-print(result)
+string = str(19)
+print(string)
+print(string[::-1])
