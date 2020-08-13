@@ -7,3 +7,6 @@
 string = str(19)
 print(string)
 print(string[::-1])
+
+str = 'aasfasf'
+print(str[0:2])

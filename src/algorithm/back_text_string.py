@@ -39,5 +39,5 @@ class Solution:
 
 if __name__ == '__main__':
     so = Solution()
-    stringChuan = 'babad'
+    stringChuan = 'aaaaa'
     print(so.longestPalindrome(stringChuan))
