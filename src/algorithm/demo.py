@@ -10,3 +10,9 @@ print(string[::-1])
 
 str = 'aasfasf'
 print(str[0:2])
+
+
+dic = {'()': '()', '[]': '[]', '{}': '{}'}
+print(dic)
+s = 's' + 'd'
+print(s)
