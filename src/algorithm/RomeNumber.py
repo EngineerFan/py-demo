@@ -55,42 +55,8 @@ class Solution:
     def romanToInt(self, s: str) -> int:
         sLen = len(s)
         dic = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-        if s[0] == 'I':
-            i = 1
-            while i < sLen:
-                if s[i] == 'V':
-                    return 4
-                elif s[i] == 'X':
-                    return 9
-                else:
-                    i += 1
-            return i
-        if s[0] == 'V':
-            i = 1
-            while i < sLen:
-                if s[i] == 'I':
-                    i += 1
-            if i == 1:
-                return 5
-            else:
-                return 5 + (i - 1)
-
-        if s[0] == 'X':
-            if sLen == 1:
-                return 10
-
+        for i in range(sLen):
             pass
-
-        if s[0] == 'L':
-            pass
-        if s[0] == 'C':
-            pass
-        if s[0] == 'D':
-            pass
-        if s[0] == 'M':
-            pass
-
-    pass
 
 
 if __name__ == '__main__':
