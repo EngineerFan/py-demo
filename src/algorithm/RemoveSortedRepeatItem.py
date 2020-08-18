@@ -52,15 +52,18 @@ from typing import List
 
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        result = []
-        for i in range(len(nums)):
-            if nums[i] not in result:
-                result.append(nums[i])
-        print(result)
-        return len(result)
+        k = len(set(nums))
+        while True:
+            for i in range(len(nums)):
+                if i != 0 and nums[i] == nums[i - 1]:
+                    nums.pop(i)
+                    break
+            if k == len(nums):
+                break
+        return len(nums)
 
 
 if __name__ == '__main__':
     s = Solution()
-    nums = [1, 1, 2]
+    nums = [-1, 0, 0, 0, 0, 3, 3]
     print(s.removeDuplicates(nums))

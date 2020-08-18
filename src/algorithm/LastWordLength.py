@@ -17,19 +17,15 @@ description: 58. 最后一个单词的长度
 
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        s.lstrip('')
-        s.rstrip('')
-        if len(s) == 0:
+        result = s.strip()
+        print(result)
+        if len(result) == 0:
             return 0
-        result = s.split(' ')
-        for i in range(len(result) - 1, 0, -1):
-            if result[i] == '':
-                continue
-            return len(result[-1])
+        result = result.split(' ')
         return len(result[-1])
 
 
 if __name__ == '__main__':
     so = Solution()
-    s = 'H '
+    s = 'H  '
     print(so.lengthOfLastWord(s))
