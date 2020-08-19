@@ -32,17 +32,24 @@ from typing import List
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         result = []
-        if numRows == 1:
-            result.append([1])
-            return result
-        if numRows == 2:
-            result.append([1, 1])
-            return result
-        for i in range(numRows):
-            pass
+        for i in range(1, numRows + 1):
+            if i == 1:
+                result.append([1])
+                continue
+            if i == 2:
+                result.append([1, 1])
+                continue
+            prevList = result[i - 2]
+            nowList = [1]
+            for j in range(i - 2):
+                element = prevList[j] + prevList[j + 1]
+                nowList.append(element)
+            nowList.append(1)
+            result.append(nowList)
+        return result
 
 
 if __name__ == '__main__':
     s = Solution()
-    numRows = 3
+    numRows = 5
     print(s.generate(numRows))
