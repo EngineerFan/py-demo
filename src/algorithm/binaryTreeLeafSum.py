@@ -40,6 +40,14 @@ class Solution:
                 return
 
             if node.left is None and node.right is None:
+                if len(resultList) != 0 and max(resultList) > result:
+                    return
+                if len(resultList) != 0 and max(resultList) < result:
+                    resultList.clear()
+                    resultValList.clear()
+                    resultList.append(result)
+                    resultValList.append(node.val)
+                    return
                 resultList.append(result)
                 resultValList.append(node.val)
                 return
@@ -48,13 +56,7 @@ class Solution:
             dfs(node.right, result, resultList)
 
         dfs(root, result, resultList)
-        print(resultList)
-        maxDeepVal = max(resultList)
-        sumsList = [i for i, x in enumerate(resultList) if x == maxDeepVal]
-        result = 0
-        for val in sumsList:
-            result = result + resultValList[val]
-        return result
+        return sum(resultValList)
 
 
 if __name__ == '__main__':
