@@ -17,5 +17,15 @@
 # print(s)
 
 l = [2, 2, 5, 6, 7, 5]
-l.insert(0,12)
-print(l)
+print(l[2:])
+print(l[:2])
+# print(min(l))
+# ll = l.copy()
+# print(l)
+# ll.remove(2)
+# print(ll)
+#
+# print('A' < 'B')
+#
+# for i in range(20, 0, -1):
+#     print(i)
