@@ -4,28 +4,10 @@
 # @Software    : PyCharm
 # @Description : demo
 
-# string = str(19)
-# print(string)
-# print(string[::-1])
-#
-# str = 'aasfasf'
-# print(str[0:2])
-#
-# dic = {'()': '()', '[]': '[]', '{}': '{}'}
-# print(dic)
-# s = 's' + 'd'
-# print(s)
 
-l = [2, 2, 5, 6, 7, 5]
-print(l[2:])
-print(l[:2])
-# print(min(l))
-# ll = l.copy()
-# print(l)
-# ll.remove(2)
-# print(ll)
-#
-# print('A' < 'B')
-#
-# for i in range(20, 0, -1):
-#     print(i)
+def fib(n: int) -> int:
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n - 1) + fib(n - 2)
