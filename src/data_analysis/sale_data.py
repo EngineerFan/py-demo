@@ -11,7 +11,7 @@ catering_sale = '../../data/sale/catering_sale.xls'
 
 data = pd.read_excel(catering_sale, index_col=u'日期')
 
-# print(data.describe())
+print(data.describe())
 
 
 import matplotlib.pyplot as plt

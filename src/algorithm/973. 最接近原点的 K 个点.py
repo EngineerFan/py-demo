@@ -44,19 +44,31 @@ class Solution:
         resultList = []
         resultDict = {}
         for i in range(len(points)):
-            tmp = pow(pow(points[i][0], 2) + pow(points[i][1], 2), 0.5)
-            print(str(tmp))
-            key = str(tmp) + '-'.join(points[i])
+            key = pow(pow(points[i][0], 2) + pow(points[i][1], 2), 0.5)
             resultList.append(key)
-            resultDict[key] = points[i]
-        sorted(resultList)
-        print(resultList)
-        return None
+            if resultDict.get(key, None) is None:
+                resultDict[key] = [points[i]]
+            else:
+                tempList = resultDict.get(key)
+                tempList.append(points[i])
+                resultDict[key] = tempList
+
+        resultList = sorted(resultList)
+        result = []
+        i = 0
+        while i < K:
+            temp = resultDict.get(resultList[i], None)
+            result.append(temp[0])
+            temp.pop(0)
+            if len(temp) != 0:
+                resultDict[resultList[i]] = temp
+            i = i + 1
+        return result
 
 
 if __name__ == '__main__':
     so = Solution()
     # points = [[3, 3], [5, -1], [-2, 4]]
-    points = [[1, 0], [0, 1]]
-    K = 2
+    points = [[1, 3], [-2, 2]]
+    K = 1
     print(so.kClosest(points=points, K=K))
