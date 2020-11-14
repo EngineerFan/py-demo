@@ -25,21 +25,27 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-
-
-
-
-
-
-
-
-
-
-
-
+        length = len(nums)
+        for i in range(length - 1, -1, -1):
+            if i - 1 != -1 and nums[i] > nums[i - 1]:
+                try:
+                    minNumber = min([number for number in nums[:]])
+                    index = nums.index(i, minNumber)
+                except ValueError:
+                    index = -2
+                nums[index], nums[i - 1] = nums[i - 1], nums[index]
+                for j in range(i, length):
+                    for k in range(j + 1, length):
+                        if nums[j] > nums[k]:
+                            nums[j], nums[k] = nums[k], nums[j]
+                # nums[i:].sort(reverse=False)
+                break
+            if i == 0:
+                nums.sort(reverse=False)
 
 
 if __name__ == '__main__':
     so = Solution()
-    nums = [1, 2, 3]
+    nums = [1, 3, 2]
     so.nextPermutation(nums)
+    print(nums)
