@@ -51,32 +51,41 @@ from typing import List
 
 class Solution:
     def isBalanced(self, root: TreeNode) -> bool:
+        def dfs(startNode: TreeNode, depth: List[int]) -> int:
+            if startNode is None:
+                return depth[0]
+            if not startNode.left and not startNode.right:
+                return depth[0]
+            depth[0] = depth[0] + 1
+            print('rChild Val: ', depth[0])
+            dfs(startNode.left, depth)
+            dfs(startNode.right, depth)
+            return depth[0]
+
         if root is None:
             return True
         q = [root]
-
-        def dfs(startNode: TreeNode, height: List[int], maxVal: List[int]) -> None:
-            if not startNode:
-                maxVal[0] = max(maxVal[0], height[0])
-                return
-            height[0] = height[0] + 1
-            dfs(startNode.left, height, maxVal)
-            print('maxVal: ', maxVal)
-            dfs(startNode.right, height, maxVal)
-
         while len(q) != 0:
-            tempNode = q[0]
-            q.pop(0)
-            if tempNode.left:
-                q.append(tempNode.left)
-            if tempNode.right:
-                q.append(tempNode.right)
-            # 递归分别求高度
-            lHeight, rHeight, maxVal = [0], [0], [0]
-            dfs(tempNode.left, lHeight, maxVal)
-            lHeight[0], maxVal[0] = maxVal[0], 0
-            dfs(tempNode.right, rHeight, maxVal)
-            rHeight[0] = maxVal[0]
-            if abs(lHeight[0] - rHeight[0]) > 1:
-                return False
+            node = q.pop(0)
+            lNode, rNode = None, None
+            if node.left:
+                q.append(node.left)
+                lNode = node.left
+            if node.right:
+                q.append(node.right)
+                rNode = node.right
+            if lNode or rNode:
+                # print(lNode , rNode.val)
+                lInitDepth, rInitDepth = [0], [0]
+                if lNode:
+                    lNodeDepth = dfs(lNode, lInitDepth) + 1
+                else:
+                    lNodeDepth = 0
+                if rNode:
+                    rNodeDepth = dfs(rNode, rInitDepth) + 1
+                else:
+                    rNodeDepth = 0
+                print(lNodeDepth, rNodeDepth)
+                if abs(lNodeDepth - rNodeDepth) > 1:
+                    return False
         return True
