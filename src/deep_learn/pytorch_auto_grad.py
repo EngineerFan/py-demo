@@ -47,10 +47,19 @@ w = V(t.rand(1), requires_grad=True)
 y = w * x
 z = y + b
 
+z.backward(retain_graph=True)
+print(w.grad)
+
+z.backward()
+print(w.grad)
+print('-' * 20)
+
 print(x.requires_grad, b.requires_grad, w.requires_grad)
 print(x.is_leaf, w.is_leaf, y.is_leaf, b.is_leaf, z.is_leaf)
 print(z.grad_fn)
 print('-' * 20)
 print(z.grad_fn.next_functions)
 print(z.grad_fn.next_functions[0][0] == y.grad_fn)
+print(w.grad_fn, b.grad_fn)
 
+print(y.grad_fn)
