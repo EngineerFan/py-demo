@@ -11,12 +11,13 @@ import torch as t
 from torch.autograd import Variable as V
 import numpy as np
 
-a = V(t.ones(3, 4), requires_grad=True)
-b = V(t.zeros(3, 4))
 
-c = t.add(a, b)
-d = c.sum()
-d.backward()
+# a = V(t.ones(3, 4), requires_grad=True)
+# b = V(t.zeros(3, 4))
+#
+# c = t.add(a, b)
+# d = c.sum()
+# d.backward()
 
 
 # print(a.requires_grad, b.requires_grad, c.requires_grad)
@@ -40,26 +41,53 @@ def grad_f(x):
 # print(grad_f(x))
 
 
-x = V(t.rand(1), requires_grad=False)
-b = V(t.rand(1), requires_grad=True)
-w = V(t.rand(1), requires_grad=True)
+# x = V(t.rand(1), requires_grad=False)
+# b = V(t.rand(1), requires_grad=True)
+# w = V(t.rand(1), requires_grad=True)
+#
+# y = w * x
+# z = y + b
+#
+# print(x.requires_grad, b.requires_grad, w.requires_grad)
+# print(x.is_leaf, w.is_leaf, y.is_leaf, b.is_leaf, z.is_leaf)
+# print(z.grad_fn)
+# print('-' * 20)
+# print(z.grad_fn.next_functions)
+# print(z.grad_fn.next_functions[0][0] == y.grad_fn)
 
-y = w * x
-z = y + b
 
-z.backward(retain_graph=True)
-print(w.grad)
+def abs(x):
+    if x.data[0] > 0:
+        return x
+    else:
+        return -x
 
-z.backward()
-print(w.grad)
-print('-' * 20)
 
-print(x.requires_grad, b.requires_grad, w.requires_grad)
-print(x.is_leaf, w.is_leaf, y.is_leaf, b.is_leaf, z.is_leaf)
-print(z.grad_fn)
-print('-' * 20)
-print(z.grad_fn.next_functions)
-print(z.grad_fn.next_functions[0][0] == y.grad_fn)
-print(w.grad_fn, b.grad_fn)
+# x = V(t.ones(1), requires_grad=True)
+# y = abs(x)
+# y.backward()
+# print(x.grad)
+#
+# print('-' * 20)
+#
+# x = V(-1 * t.ones(1), requires_grad=True)
+# y = abs(x)
+# y.backward()
+# print(x.grad)
 
-print(y.grad_fn)
+def f(x):
+    result = 1
+    for ii in x:
+        if ii.item() > 0:
+            result = ii * result
+            # print(result)
+    return result
+
+
+print(t.arange(-2., 4.))
+
+x = V(t.tensor(np.arange(-2, 4)).float(), requires_grad=True)
+y = f(x)
+
+y.backward()
+print(x.grad)
