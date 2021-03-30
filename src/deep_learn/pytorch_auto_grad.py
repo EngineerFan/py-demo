@@ -55,12 +55,12 @@ def grad_f(x):
 # print(z.grad_fn.next_functions)
 # print(z.grad_fn.next_functions[0][0] == y.grad_fn)
 
-
-def abs(x):
-    if x.data[0] > 0:
-        return x
-    else:
-        return -x
+#
+# def abs(x):
+#     if x.data[0] > 0:
+#         return x
+#     else:
+#         return -x
 
 
 # x = V(t.ones(1), requires_grad=True)
@@ -74,20 +74,80 @@ def abs(x):
 # y = abs(x)
 # y.backward()
 # print(x.grad)
+#
+# def f(x):
+#     result = 1
+#     for ii in x:
+#         if ii.item() > 0:
+#             result = ii * result
+#             # print(result)
+#     return result
+#
+#
+# print(t.arange(-2., 4.))
+#
+# x = V(t.tensor(np.arange(-2, 4)).float(), requires_grad=True)
+# y = f(x)
+#
+# y.backward()
+# print(x.grad)
 
-def f(x):
-    result = 1
-    for ii in x:
-        if ii.item() > 0:
-            result = ii * result
-            # print(result)
-    return result
+# def variable_hook(grad):
+# #     print('y的梯度： \r\n', grad)
+# #
+# #
+# # x = V(t.ones(3), requires_grad=True)
+# # w = V(t.rand(3), requires_grad=True)
+# #
+# # y = x * w
+# # hook_handle = y.register_hook(variable_hook)
+# # z = y.sum()
+# # z.backward()
+# print(t.arange(0, 3))
+# x = V(t.arange(0, 3).float(), requires_grad=True)
+# y = x ** 2 + x * 2
+# z = y.sum()
+# z.backward()
+# print(x.grad)
 
 
-print(t.arange(-2., 4.))
+import base64
+from Crypto.Cipher import AES
 
-x = V(t.tensor(np.arange(-2, 4)).float(), requires_grad=True)
-y = f(x)
+BLOCK_SIZE = 32
 
-y.backward()
-print(x.grad)
+'''
+采用AES对称加密算法
+'''
+
+
+def add_to_16(value):
+    while len(value) % 16 != 0:
+        value += '\0'
+    return str.encode(value)
+
+
+def encrypt_oracle():
+    key = '123456'
+    text = '傻鲲儿'
+    aes = AES.new(add_to_16(key), AES.MODE_ECB)
+    encrypt_aes = aes.encrypt(add_to_16(text), BLOCK_SIZE)
+    encrypted_text = str(base64.encodebytes(encrypt_aes), encoding='utf-8')  # 执行加密并转码返回bytes
+    print(encrypted_text)
+
+
+# 解密方法
+def decrypt_oralce():
+    # 秘钥
+    key = '123456'
+    # 密文
+    text = 'qR/TQk4INsWeXdMSbCDDdA=='
+    aes = AES.new(add_to_16(key), AES.MODE_ECB)
+    base64_decrypted = base64.decodebytes(text.encode(encoding='utf-8'))
+    decrypted_text = str(aes.decrypt(base64_decrypted, BLOCK_SIZE), encoding='utf-8').replace('\0', '')
+    print(decrypted_text)
+
+
+if __name__ == '__main__':
+    encrypt_oracle()
+    # decrypt_oralce()
