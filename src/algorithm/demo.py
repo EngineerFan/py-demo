@@ -4,9 +4,17 @@
 # @Software    : PyCharm
 # @Description : demo
 
+from collections import defaultdict
+from collections import OrderedDict
 
-ll = [1, 2, 3]
+s = 'mississippi'
 
-ll.insert(0, -1)
-ll.insert(1, -2)
-print(ll)
+# d = defaultdict(int)
+
+
+d = OrderedDict.fromkeys('abcde')
+
+
+
+
+
