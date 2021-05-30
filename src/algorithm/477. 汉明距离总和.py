@@ -27,4 +27,7 @@ class Solution:
 so = Solution()
 nums = [4, 14, 2]
 
+mp = Counter([0])
+print('mp: ', mp)
+
 print(so.totalHammingDistance(nums=nums))
