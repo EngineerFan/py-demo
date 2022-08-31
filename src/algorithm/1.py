@@ -1,3 +1,7 @@
-random = [(2, 2), (3, 4), (4, 1), (1, 3)]
-random.sort(key=lambda r: r[1])
-print(random)
+l = [1, 2, 3]
+a = []
+print(l)
+print(a + l)
+l.clear()
+print(l)
+
